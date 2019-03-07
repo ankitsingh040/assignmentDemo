@@ -12,3 +12,7 @@ to list all tasks:
 To view the assignment (after starting the application) go to:
 
 [http://localhost:9000/travel/index.html](http://localhost:9000/travel/index.html)
+
+To get the fares for origin/destination go to:
+
+[http://localhost:9000/travel/fares.html](http://localhost:9000/travel/fares.html)
