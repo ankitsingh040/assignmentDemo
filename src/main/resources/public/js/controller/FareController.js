@@ -19,9 +19,9 @@ controller('FareController', ['FareService', function(FareService) {
 
         return airports.filter(function(airport) {
 
-            var matches_name = airport.name.indexOf(typedValue) != -1;
-            var matches_code = airport.code.indexOf(typedValue) != -1;
-            var matches_desc = airport.description.indexOf(typedValue) != -1;
+            var matches_name = airport.name.toUpperCase().indexOf(typedValue.toUpperCase()) != -1;
+            var matches_code = airport.code.toUpperCase().indexOf(typedValue.toUpperCase()) != -1;
+            var matches_desc = airport.description.toUpperCase().indexOf(typedValue.toUpperCase()) != -1;
             return matches_name || matches_code || matches_desc;
         });
     }
