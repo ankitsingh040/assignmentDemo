@@ -48,7 +48,18 @@ controller('FareController', ['FareService', function(FareService) {
     
     this.getFare = function(){
         this.reset();
-        if (this.requestFare.origin == this.requestFare.destination) {
+        
+        if (null == this.requestFare.origin || 0 == this.requestFare.origin.length) {
+        	this.error = 'Please select an Origin';
+        	return;
+        }
+        
+        if (null == this.requestFare.destination || 0 == this.requestFare.destination.length) {
+        	this.error = 'Please select a Destination';
+        	return;
+        }
+        
+        if (this.requestFare.origin.toUpperCase() == this.requestFare.destination.toUpperCase()) {
             this.error = 'Please select a different Destination';
             return;
         }
@@ -59,7 +70,7 @@ controller('FareController', ['FareService', function(FareService) {
         promise.$promise.then(function (response) {
             this.result = response;
         }.bind(this), function(error) {
-            this.error = 'Please try again later!';
+            this.error = 'No Result found!';
         }.bind(this));
     }
     
