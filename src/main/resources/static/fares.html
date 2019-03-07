@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>KLM Case</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<script src="https://code.angularjs.org/1.5.8/angular.js"></script>
+	<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.8/angular-resource.min.js"></script>
+    <script src="js/lib/Chart.js"></script>
+    <script src="js/lib/angular-chart.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controller/FareController.js"></script>
+    <script src="js/services/FareService.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/lib/ui-bootstrap-tpls-2.0.0.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+	 <!-- Custom styles for this template -->
+	 <link href="css/jumbotron.css" rel="stylesheet">
+</head>
+
+<body ng-app="SimpleApp" ng-controller="FareController as ctrl">
+    <div class="container">
+      <h3>Select Origin and Destination</h3>
+      <div class="row">
+        <div class="col-md-4">
+            <div class="custom-typeahead">
+                <h4>Origin</h4>
+                <input type="text" ng-change="ctrl.searchAirports(ctrl.requestFare.origin, 'Origin')" ng-model="ctrl.requestFare.origin" uib-typeahead="airport.code as airport.code + ', ' + airport.name + ', ' + airport.description for airport in ctrl.filterByName(ctrl.originSearchResults, $viewValue) | limitTo:8" class="form-control" required>
+            </div>
+        </div>
+          <div class="col-md-4">
+              <div class="custom-typeahead">
+                  <h4>Destination</h4>
+                  <input type="text" ng-change="ctrl.searchAirports(ctrl.requestFare.destination, 'Destination')" ng-model="ctrl.requestFare.destination" uib-typeahead="airport.code as airport.code + ', ' + airport.name + ', ' + airport.description for airport in ctrl.filterByName(ctrl.destinationSearchResults, $viewValue) | limitTo:8" class="form-control" required>
+              </div>
+          </div>
+        <div class="col-md-8">
+            <div class="custom-typeahead">
+                <a class="btn btn-default" ng-click="ctrl.getFare()" role="button">Check Fare</a>
+                <p class="error">{{ctrl.error}}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="data" ng-show="ctrl.result.fare != null">
+                    <p>Origin: {{ctrl.result.origin.code}}, {{ctrl.result.origin.name}}, {{ctrl.result.origin.description}}</p>
+                    <p>Destination: {{ctrl.result.destination.code}}, {{ctrl.result.destination.name}}, {{ctrl.result.destination.description}}</p>
+                    <p>Fare: <b>{{ctrl.result.fare.amount}} {{ctrl.result.fare.currency}}</b></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
